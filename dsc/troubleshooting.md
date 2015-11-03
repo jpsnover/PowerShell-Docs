@@ -36,7 +36,7 @@ wevtutil.exe set-log “Microsoft-Windows-Dsc/Analytic” /q:true /e:true
 DSC logs are split over the three log channels based on the importance of the message. The operational log in DSC contains all error messages, and can be used to identify a problem. The analytic log has a higher volume of events, and can identify where error(s) occurred. This channel also contains verbose messages (if any). The debug log contains logs that can help you understand how the errors occurred. DSC event messages are structured such that every event message begins with a job ID that uniquely represents a DSC operation. The example below attempts to obtain the message from the first event logged into the operational DSC log.
 
 ```powershell
-PS C:\Users> $AllDscOpEvents=get-winevent -LogName "Microsoft-Windows-Dsc/Operational"
+PS C:\Users> $AllDscOpEvents=Get-WinEvent -LogName "Microsoft-Windows-Dsc/Operational"
 PS C:\Users> $FirstOperationalEvent=$AllDscOpEvents[0]
 PS C:\Users> $FirstOperationalEvent.Message
 Job {02C38626-D95A-47F1-9DA2-C1D44A7128E7} : 
@@ -263,7 +263,7 @@ Following are fields in this object that can be used for more information about 
 Alternately, you can gather information on the events by saving the output of `Trace-xDscOperation` into a variable. You can use the following command to display all the events for a particular DSC operation:
 
 ```powershell
-(Trace-xDscOperation-EquenceID3).Event
+(Trace-xDscOperation -SequenceID 3).Event
 ```
 
 This will display the same results as the `Get-WinEvent` cmdlet, such as in the output below:
